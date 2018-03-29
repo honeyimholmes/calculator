@@ -1,0 +1,83 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}   
+
+span, p {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+body {
+    background: #e6ecf7;
+}
+
+.calculator {
+    width: 400px;
+    height: auto;
+    margin: 100px auto;
+    background: #581845;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 6px 21px -7px rgba(112,11,51,1);
+    -moz-box-shadow: 0px 6px 21px -7px rgba(112,11,51,1);
+    box-shadow: 0px 6px 21px -7px rgba(112,11,51,1);
+}
+
+.calc-body {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+span {
+    display: inline-block;
+    width: 70px;
+    height: 40px;
+    background: #C70039;
+    margin: 5px;
+    flex-basis: 85px;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    font-size: 30px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 6px 32px -11px rgba(217,89,140,1);
+    -moz-box-shadow: 0px 6px 32px -11px rgba(217,89,140,1);
+    box-shadow: 0px 6px 32px -11px rgba(217,89,140,1);
+}
+
+span:hover {
+    background: #FF5733;
+}
+
+.clear {
+    margin-top: 0;
+    width: 80px;
+}
+
+.calc-head {
+    width: 100%;
+    display: flex;
+}
+
+.screen {
+    background: #900C3F;
+    height: 40px;
+    display: inline-block;
+    width: 290px;
+    margin: 5px;
+    margin-top: 0;
+    color: #fff;
+    text-align: right;
+    padding: 5px 5px;
+    font-size: 35px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-family: 'Josefin Sans', sans-serif;
+    overflow: hidden;
+}
+
