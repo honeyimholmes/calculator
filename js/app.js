@@ -1,53 +1,82 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    var number = '';
-    var newNumber = '';
+    var left = '';
+    var right = '';
+    var memory = '';
     var screen = document.querySelector('.screen');
     var operator = '';
     screen.innerHTML = '0';
 
-    function screenMaxLength(number) {
-        if (number.length > 12) {
-            number = '';
-            screen.innerHTML = ('Too long!');
-        }
-    }
+    // function screenMaxLength(number) {
+    //     if (number.length > 12) {
+    //         number = '';
+    //         screen.innerHTML = ('Too long!');
+    //     }
+    // }
 
     var numButtons = document.querySelectorAll('.numbers');
 
     for (let i = 0; i < numButtons.length; i++) {
         numButtons[i].addEventListener('click', function() {
-            if (number == '0') {
+            if (screen.innerHTML == '0') {
                 if (this.innerHTML == '0') {
-                    number = '0'
+                    left = '0'
                 } else if (this.innerHTML == '.') {
-                    number = '0.'
+                    left = '0.'
+                    screen.innerHTML = left;
                 } else {
-                    number = this.innerHTML
+                    left = this.innerHTML;
+                    screen.innerHTML = left;
                 }     
             } else {
-                number += this.innerHTML;
-            }
-            screen.innerHTML = number;
-            screenMaxLength(number);
+                if (memory === '') {
+                    left += this.innerHTML;
+                    screen.innerHTML = left;
+                } else {
+                    right += this.innerHTML;
+                    screen.innerHTML = right;
+                    if (operator === '+') {
+                        memory = (parseFloat(left) + parseFloat(right)).toString();
+                   }
+                   else if (operator === '-') {
+                        memory = (parseFloat(left) -  parseFloat(right)).toString();
+                   }
+                   else if (operator === 'x') {
+                        memory = (parseFloat(left) *  parseFloat(right)).toString();
+                   }
+                   else if (operator === '\u00F7') {
+                        memory = (parseFloat(left) /  parseFloat(right)).toString();
+                   }
+                }
+                
+            } 
         });
     }
 
     var clearButton = document.querySelector('.clear');
 
     clearButton.addEventListener('click', function() {
-        number = '0';
-        screen.innerHTML = number;
+        left = '';
+        right = '';
+        memory = '';
+        screen.innerHTML = '0';
     });
 
     var operators = document.querySelectorAll('.operators');
 
     for (let i = 0; i < operators.length; i++) {
         operators[i].addEventListener('click', function() {
-            operator = this.innerHTML;
-            newNumber = number;
-            number = '';
-            screen.innerHTML += operator;
+            if (right === '') {
+                operator = this.innerHTML;
+                memory = operator;
+                screen.innerHTML += operator;
+            } else {
+                screen.innerHTML = memory;
+                operator = this.innerHTML;
+                left = memory;
+                screen.innerHTML += operator;
+                right = '';
+            }
         });
     }
 
@@ -55,20 +84,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     equals.addEventListener('click', function() {
         if (operator === '+') {
-             number = (parseFloat(newNumber) + parseFloat(number)).toString();
-        }
-        else if (operator === '-') {
-            number = (parseFloat(newNumber) -  parseFloat(number)).toString();
-        }
-        else if (operator === 'x') {
-            number = (parseFloat(newNumber) *  parseFloat(number)).toString();
-        }
-        else if (operator === '%') {
-            number = (parseFloat(newNumber) /  parseFloat(number)).toString();
-        }
-        screenMaxLength(number);
-        screen.innerHTML = number;
-        number = '';
-        newNumber = '';
+            memory = (parseFloat(left) + parseFloat(right)).toString();
+       }
+       else if (operator === '-') {
+            memory = (parseFloat(left) -  parseFloat(right)).toString();
+       }
+       else if (operator === 'x') {
+            memory = (parseFloat(left) *  parseFloat(right)).toString();
+       }
+       else if (operator === '\u00F7') {
+            memory = (parseFloat(left) /  parseFloat(right)).toString();
+       }
+
+        screen.innerHTML = memory;
+        left = '';
+        right = '';
+        memory = '';
     });     
 });
